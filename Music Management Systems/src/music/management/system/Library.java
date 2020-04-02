@@ -170,4 +170,28 @@ public class Library {
         System.out.println("");
     }
 
+    public static void printSongsFromAlbum(String albumName){
+        for (Song song :songs){
+            if (song.getAlbum().getName().equals(albumName)){
+                System.out.println("Song name :" + song.getName() + " artist: " + song.getArtist().getName() + ", album: " + song.getAlbum().getName());
+            }
+        }
+    }
+
+    public static void printAlbumsFromArtist(String artistName){
+        for (Album album :albums){
+            if (album.getArtist().getName().equals(artistName)){
+                System.out.println("Album name: " + album.getName() + ", genre: " + album.getGenre() + " by " + album.getArtist().getName() + " duration: " + album.getDuration());
+            }
+        }
+    }
+
+    public static void printSongsFromArtist(String artistName){
+        for (Song song :songs){
+            if (song.getArtist().getName().equals(artistName)){
+                System.out.println("Song name :" + song.getName() + " artist: " + song.getArtist().getName() + ", album: " + song.getAlbum().getName());
+            }
+        }
+    }
+
 }

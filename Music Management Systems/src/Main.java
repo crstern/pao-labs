@@ -57,10 +57,13 @@ public class Main {
         Library.printPlaylistByName("Favorites");
 
 
-//        Library.printPodcastArtists();
-//        Library.printArtists();
-//        Library.printAlbums();
+        Library.printPodcastArtists();
+        Library.printArtists();
+        Library.printAlbums();
 
+        Library.printSongsFromAlbum("MMLP2");
+        Library.printSongsFromArtist("Metallica");
+        Library.printAlbumsFromArtist("Metallica");
     }
 
 
