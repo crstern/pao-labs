@@ -1,13 +1,10 @@
 package music.management.system;
 
-public class Song {
-    private String name = "";
-    private String genre = "<unk>";
+public class Song extends Track {
     private Album album = null;
     private MusicArtist artist = null;
-    private Integer duration = 3;
 
-    public Song(String name, String genre, String albumName, String artistName, Integer duration){
+    public Song(String name, String genre, String albumName, String artistName, Integer duration) {
         this.name = name;
         this.genre = genre;
         this.artist = Library.findOrCreateMusicArtistByName(artistName);
@@ -31,22 +28,4 @@ public class Song {
     public void setArtist(MusicArtist artist) {
         this.artist = artist;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
-
-
 }

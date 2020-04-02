@@ -4,22 +4,18 @@ import kotlin.jvm.JvmOverloads;
 
 import java.util.Vector;
 
-public class MusicArtist {
-    private String name;    //artist name
+public final class MusicArtist extends Artist {
     private Vector<Album> albums = null; // albums produced by artist
-    private Vector<String> genres = null; // geners adopted by artist
 
-
-    public MusicArtist(String name)
-    {
+    public MusicArtist(String name) {
         this.name = name;
         this.genres = null;
-        this.albums = null;
+        this.albums = new Vector<Album>();
         Library.addMusicArtist(this);
     }
 
     @JvmOverloads
-    public MusicArtist(String name, Album album){
+    public MusicArtist(String name, Album album) {
         this.name = name;
         this.albums = new Vector<Album>();
         this.albums.add(album);
@@ -37,15 +33,13 @@ public class MusicArtist {
     }
 
 
-
-    public void appendAlbum(Album album){
+    public void appendAlbum(Album album) {
         /*
         Adds 'album' album and updates the gerers list.
          */
-        if(this.albums == null){
+        if (this.albums == null) {
             this.albums = new Vector<Album>();
         }
-
 
 
         String albumGenre = album.getGenre();
@@ -61,22 +55,6 @@ public class MusicArtist {
             }
         }
         genres.add(albumGenre);
-    }
-
-    public void setName(String name){
-        this.name = name;
-    }
-
-    public String getName(){
-        return this.name;
-    }
-
-    public Vector<String> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(Vector<String> genres) {
-        this.genres = genres;
     }
 
     public Vector<Album> getAlbums() {

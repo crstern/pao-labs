@@ -3,7 +3,7 @@ package music.management.system;
 import java.util.Date;
 import java.util.Vector;
 
-public class Album{
+public class Album {
     private String genre = "";
     private String name = "<unk>";
     private MusicArtist artist = null;
@@ -12,12 +12,7 @@ public class Album{
     private Vector<Song> songs = null;
 
 
-    public Vector<Song> getSongs() {
-        return songs;
-    }
-
-
-    public Album(String genre, String name, String artistName, Integer duration, Date releaseDate, Vector <Song> songs){
+    public Album(String genre, String name, String artistName, Integer duration, Date releaseDate, Vector<Song> songs) {
         this.genre = genre;
         this.name = name;
         this.artist = Library.findOrCreateMusicArtistByName(artistName, this);
@@ -28,16 +23,15 @@ public class Album{
         Library.addAlbumToArtist(this, this.artist);
     }
 
-    public Album(String genre, String name, String artistName){
+    public Album(String genre, String name, String artistName) {
         this.genre = genre;
         this.name = name;
         this.duration = 0;
-        this.songs =  new Vector<Song>();
+        this.songs = new Vector<Song>();
         this.artist = Library.findOrCreateMusicArtistByName(artistName, this);
         this.artist.appendAlbum(this);
         Library.addAlbum(this);
     }
-
 
 
     public Album(String genre, String name, MusicArtist artist) {
@@ -48,7 +42,6 @@ public class Album{
         this.songs = new Vector<Song>();
         Library.addAlbum(this);
     }
-
 
 
     public Integer getDuration() {
@@ -87,12 +80,17 @@ public class Album{
         return artist;
     }
 
-    public void setArtist(MusicArtist artist) { this.artist = artist; }
+    public void setArtist(MusicArtist artist) {
+        this.artist = artist;
+    }
 
-    public void addSong(Song song){
+    public void addSong(Song song) {
         Library.addSong(song);
         this.songs.add(song);
         this.duration += song.getDuration();
     }
 
+    public Vector<Song> getSongs() {
+        return songs;
+    }
 }
