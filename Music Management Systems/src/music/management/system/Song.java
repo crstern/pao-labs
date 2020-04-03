@@ -9,7 +9,7 @@ public class Song extends Track {
         this.genre = genre;
         this.artist = Library.findOrCreateMusicArtistByName(artistName);
         this.duration = duration;
-        this.album = Library.findOrCreateAlbumByName(albumName, genre, this.artist, duration);
+        this.album = Library.findOrCreateAlbumByName(albumName, genre, this.artist);
         this.album.addSong(this);
     }
 

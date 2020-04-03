@@ -31,8 +31,9 @@ public class Main {
         podcastPlaylist
 
          */
+        MusicArtist metallica = Library.findOrCreateMusicArtistByName("Metallica");
+        Album ride = Library.findOrCreateAlbumByName("Ride the Lightning", "Metal", metallica);
         Album masterOfPuppets = new Album("Metal", "Master Of Puppets", "Metallica");
-        Album ride = new Album("Metal", "Ride the Lightning", "Metallica");
 
         Song track1 = new Song("Master Of Puppets", "Metal", "Master Of Puppets", "Metallica", 8);
         Song track2 = new Song("Battery", "Metal", "Master Of Puppets", "Metallica", 5);

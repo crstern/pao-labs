@@ -33,7 +33,7 @@ public class Library {
         return new MusicArtist(name, album);
     }
 
-    public static Album findOrCreateAlbumByName(String name, String genre, MusicArtist artist, Integer duration) {
+    public static Album findOrCreateAlbumByName(String name, String genre, MusicArtist artist) {
         for (Album album : albums) {
             if (album.getName().equals(name)) {
                 return album;
