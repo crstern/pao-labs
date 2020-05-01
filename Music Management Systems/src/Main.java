@@ -66,11 +66,11 @@ public class Main {
 //
 //
 
-        ManageWithFiles manageWithFiles = ManageWithFiles.getInstance("./src/music/management/data/inputArtist.csv",
-                "./src/music/management/data/inputPodcasts.csv", "./src/music/management/data/inputSongs.csv",
-                "./src/music/management/data/inputAlbums.csv", "./src/music/management/data/outputArtist.csv",
-                "./src/music/management/data/outputPodcasts.csv", "./src/music/management/data/outputSongs.csv",
-                "./src/music/management/data/outputAlbums.csv");
+        ManageWithFiles manageWithFiles = ManageWithFiles.getInstance("./data/inputArtist.csv",
+                "./data/inputPodcasts.csv", "./data/inputSongs.csv",
+                "./data/inputAlbums.csv", "./data/outputArtist.csv",
+                "./data/outputPodcasts.csv", "./data/outputSongs.csv",
+                "./data/outputAlbums.csv");
         manageWithFiles.loadAll();
 
         System.out.println("Print songs from MMLP2: ");
