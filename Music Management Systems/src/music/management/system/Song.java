@@ -1,8 +1,8 @@
 package music.management.system;
 
 public class Song extends Track {
-    private Album album = null;
-    private MusicArtist artist = null;
+    private Album album;
+    private MusicArtist artist;
 
     public Song(String name, String genre, String albumName, String artistName, Integer duration) {
         this.name = name;

@@ -122,7 +122,7 @@ public class Library {
                 System.out.println("___ ** Song name :" + song.getName() + " duration : " + song.getDuration());
             }
         }
-        System.out.println("");
+        System.out.println();
     }
 
     public static void printPlaylistByName(String playlistName){
@@ -135,7 +135,7 @@ public class Library {
             }
         }
         System.out.println("Playlist with name " + playlistName + " is not found!");
-        System.out.println("");
+        System.out.println();
 
     }
 
@@ -143,31 +143,44 @@ public class Library {
         for(PodcastArtist artist : podcastArtists){
             System.out.println("Artist name: " + artist.getName() + " produced " + artist.getPodcasts().size() + " podcasts:");
             for (Podcast podcast : podcasts){
+                if (podcast.getArtist().getName().equals(artist.getName()))
                 System.out.println("__* Podcast name :" + podcast.getName() + " by: " + podcast.getArtist().getName() + ", duration: " + podcast.getDuration());
             }
         }
-        System.out.println("");
+        System.out.println();
+    }
+
+    public static Vector<PodcastArtist> getPodcastArtists() {
+        return podcastArtists;
+    }
+
+    public static Vector<Podcast> getPodcasts() {
+        return podcasts;
+    }
+
+    public static Vector<Playlist> getPlaylists() {
+        return playlists;
     }
 
     public static void printPodcasts() {
         for (Podcast podcast : podcasts) {
             System.out.println("Podcast name :" + podcast.getName() + " by: " + podcast.getArtist().getName() + ", duration: " + podcast.getDuration());
         }
-        System.out.println("");
+        System.out.println();
     }
 
     public static void printSongs() {
         for (Song song : songs) {
             System.out.println("Song name :" + song.getName() + " artist: " + song.getArtist().getName() + ", album: " + song.getAlbum().getName());
         }
-        System.out.println("");
+        System.out.println();
     }
 
     public static void printArtists() {
         for (MusicArtist artist : musicArtists) {
             System.out.println("Artist name: " + artist.getName());
         }
-        System.out.println("");
+        System.out.println();
     }
 
     public static void printSongsFromAlbum(String albumName){
