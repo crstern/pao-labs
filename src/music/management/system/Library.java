@@ -33,7 +33,7 @@ public class Library {
         return new MusicArtist(name, album);
     }
 
-    public static Album findOrCreateAlbumByName(String name, String genre, MusicArtist artist, Integer duration) {
+    public static Album findOrCreateAlbumByName(String name, String genre, MusicArtist artist) {
         for (Album album : albums) {
             if (album.getName().equals(name)) {
                 return album;
@@ -122,7 +122,7 @@ public class Library {
                 System.out.println("___ ** Song name :" + song.getName() + " duration : " + song.getDuration());
             }
         }
-        System.out.println("");
+        System.out.println();
     }
 
     public static void printPlaylistByName(String playlistName){
@@ -135,7 +135,7 @@ public class Library {
             }
         }
         System.out.println("Playlist with name " + playlistName + " is not found!");
-        System.out.println("");
+        System.out.println();
 
     }
 
@@ -143,31 +143,68 @@ public class Library {
         for(PodcastArtist artist : podcastArtists){
             System.out.println("Artist name: " + artist.getName() + " produced " + artist.getPodcasts().size() + " podcasts:");
             for (Podcast podcast : podcasts){
+                if (podcast.getArtist().getName().equals(artist.getName()))
                 System.out.println("__* Podcast name :" + podcast.getName() + " by: " + podcast.getArtist().getName() + ", duration: " + podcast.getDuration());
             }
         }
-        System.out.println("");
+        System.out.println();
+    }
+
+    public static Vector<PodcastArtist> getPodcastArtists() {
+        return podcastArtists;
+    }
+
+    public static Vector<Podcast> getPodcasts() {
+        return podcasts;
+    }
+
+    public static Vector<Playlist> getPlaylists() {
+        return playlists;
     }
 
     public static void printPodcasts() {
         for (Podcast podcast : podcasts) {
             System.out.println("Podcast name :" + podcast.getName() + " by: " + podcast.getArtist().getName() + ", duration: " + podcast.getDuration());
         }
-        System.out.println("");
+        System.out.println();
     }
 
     public static void printSongs() {
         for (Song song : songs) {
             System.out.println("Song name :" + song.getName() + " artist: " + song.getArtist().getName() + ", album: " + song.getAlbum().getName());
         }
-        System.out.println("");
+        System.out.println();
     }
 
     public static void printArtists() {
         for (MusicArtist artist : musicArtists) {
             System.out.println("Artist name: " + artist.getName());
         }
-        System.out.println("");
+        System.out.println();
+    }
+
+    public static void printSongsFromAlbum(String albumName){
+        for (Song song :songs){
+            if (song.getAlbum().getName().equals(albumName)){
+                System.out.println("Song name :" + song.getName() + " artist: " + song.getArtist().getName() + ", album: " + song.getAlbum().getName());
+            }
+        }
+    }
+
+    public static void printAlbumsFromArtist(String artistName){
+        for (Album album :albums){
+            if (album.getArtist().getName().equals(artistName)){
+                System.out.println("Album name: " + album.getName() + ", genre: " + album.getGenre() + " by " + album.getArtist().getName() + " duration: " + album.getDuration());
+            }
+        }
+    }
+
+    public static void printSongsFromArtist(String artistName){
+        for (Song song :songs){
+            if (song.getArtist().getName().equals(artistName)){
+                System.out.println("Song name :" + song.getName() + " artist: " + song.getArtist().getName() + ", album: " + song.getAlbum().getName());
+            }
+        }
     }
 
 }

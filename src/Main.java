@@ -1,6 +1,9 @@
+import music.management.ManageWithFiles;
 import music.management.system.*;
 
+import java.io.*;
 import java.util.Vector;
+
 
 
 public class Main {
@@ -31,36 +34,58 @@ public class Main {
         podcastPlaylist
 
          */
-        Album masterOfPuppets = new Album("Metal", "Master Of Puppets", "Metallica");
-        Album ride = new Album("Metal", "Ride the Lightning", "Metallica");
-
-        Song track1 = new Song("Master Of Puppets", "Metal", "Master Of Puppets", "Metallica", 8);
-        Song track2 = new Song("Battery", "Metal", "Master Of Puppets", "Metallica", 5);
-        Song track3 = new Song("Disposable Heroes", "Metal", "Master Of Puppets", "Metallica", 7);
-
-        Song track4 = new Song("Berzerk", "Rap", "MMLP2", "Eminem", 4);
-        Song track5 = new Song("Rap God", "Rap", "MMLP2", "Eminem", 5);
-        Song track6 = new Song("For Whom the Bell Tolls", "Metal", "Ride the Lightning", "Metallica", 7);
-        Podcast pod1 = new Podcast("Ce facem dupa ce trece pandemia", "George Buhnici", 134);
-        Podcast pod2 = new Podcast("Ce ne asteapta in carantina", "George Buhnici", 110);
-
-        Playlist favorites = new Playlist("Favorites", track4);
-        Library.addSongToPlaylist(track4, "Favorites");
-        Library.addSongToPlaylist(track5, "Favorites");
-
-        Library.addSongToPlaylist(track2, "Rock");
-        Library.addSongToPlaylist(track1, "Rock");
-
-
-        Library.printPlaylistByName("Rock");
-        Library.printPlaylistByName("Metal");
-        Library.printPlaylistByName("Favorites");
+//        MusicArtist metallica = Library.findOrCreateMusicArtistByName("Metallica");
+//        Album ride = Library.findOrCreateAlbumByName("Ride the Lightning", "Metal", metallica);
+//        Album masterOfPuppets = new Album("Metal", "Master Of Puppets", "Metallica");
+//
+//        Song track1 = new Song("Master Of Puppets", "Metal", "Master Of Puppets", "Metallica", 8);
+//        Song track2 = new Song("Battery", "Metal", "Master Of Puppets", "Metallica", 5);
+//        Song track3 = new Song("Disposable Heroes", "Metal", "Master Of Puppets", "Metallica", 7);
+//
+//        Song track4 = new Song("Berzerk", "Rap", "MMLP2", "Eminem", 4);
+//        Song track5 = new Song("Rap God", "Rap", "MMLP2", "Eminem", 5);
+//        Song track6 = new Song("For Whom the Bell Tolls", "Metal", "Ride the Lightning", "Metallica", 7);
+//        Podcast pod1 = new Podcast("Ce facem dupa ce trece pandemia", "George Buhnici", 134);
+//        Podcast pod2 = new Podcast("Ce ne asteapta in carantina", "George Buhnici", 110);
+//
+//        Playlist favorites = new Playlist("Favorites", track4);
+//        Library.addSongToPlaylist(track4, "Favorites");
+//        Library.addSongToPlaylist(track5, "Favorites");
+//
+//        Library.addSongToPlaylist(track2, "Rock");
+//        Library.addSongToPlaylist(track1, "Rock");
 
 
-//        Library.printPodcastArtists();
-//        Library.printArtists();
-//        Library.printAlbums();
 
+//        ReadGeneric readGeneric = ReadGeneric.getInstance("./inputSongs.csv", "./outputSongs.csv");
+//        readGeneric.loadLibrary();
+
+//        Library.printPlaylistByName("Rock");
+//        Library.printPlaylistByName("Metal");
+//        Library.printPlaylistByName("Favorites");
+//
+//
+
+        ManageWithFiles manageWithFiles = ManageWithFiles.getInstance("./inputArtist.csv", "./inputPodcasts.csv",
+                "./inputSongs.csv", "./inputAlbums.csv", "./outputArtist.csv", "./outputPodcasts.csv",
+                "./outputSongs.csv", "./outputAlbums.csv");
+        manageWithFiles.loadAll();
+
+        System.out.println("Print songs from MMLP2: ");
+
+        Library.printSongsFromAlbum("MMLP2");
+        System.out.println("\nPrint songs from Metallica: ");
+        Library.printSongsFromArtist("Metallica");
+        System.out.println("\nPrint songs from Eminem: ");
+
+        Library.printAlbumsFromArtist("Eminem");
+        Library.printPodcastArtists();
+        Library.printArtists();
+        Library.printAlbums();
+        manageWithFiles.storeArtists();
+        manageWithFiles.storeAlbums();
+        manageWithFiles.storePodcasts();
+        manageWithFiles.storeSongs();
     }
 
 
