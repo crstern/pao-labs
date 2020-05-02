@@ -2,6 +2,10 @@ package music.management.system;
 
 import kotlin.jvm.JvmOverloads;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.Vector;
 
 public class Library {
@@ -11,10 +15,30 @@ public class Library {
     private static Vector<PodcastArtist> podcastArtists = new Vector<PodcastArtist>();
     private static Vector<Podcast> podcasts = new Vector<Podcast>();
     private static Vector<Playlist> playlists = new Vector<Playlist>();
+    private static BufferedWriter bf;
 
+    static {
+        try {
+            bf = new BufferedWriter(new FileWriter("./action_timestamp.csv"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void closeBuffer() throws IOException {
+        bf.close();
+    }
+
+    private static void storeActionTimestamp(String action_name, long timestamp) throws IOException {
+        String csvSeparator = ",";
+        bf.write(action_name + csvSeparator + timestamp + "\n");
+    }
 
     @JvmOverloads
-    public static MusicArtist findOrCreateMusicArtistByName(String name) {
+    public static MusicArtist findOrCreateMusicArtistByName(String name) throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         for (MusicArtist artist : musicArtists) {
             if (artist.getName().equals(name)) {
                 return artist;
@@ -24,7 +48,10 @@ public class Library {
     }
 
     @JvmOverloads
-    public static MusicArtist findOrCreateMusicArtistByName(String name, Album album) {
+    public static MusicArtist findOrCreateMusicArtistByName(String name, Album album) throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         for (MusicArtist artist : musicArtists) {
             if (artist.getName().equals(name)) {
                 return artist;
@@ -33,7 +60,10 @@ public class Library {
         return new MusicArtist(name, album);
     }
 
-    public static Album findOrCreateAlbumByName(String name, String genre, MusicArtist artist) {
+    public static Album findOrCreateAlbumByName(String name, String genre, MusicArtist artist) throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         for (Album album : albums) {
             if (album.getName().equals(name)) {
                 return album;
@@ -42,7 +72,10 @@ public class Library {
         return new Album(genre, name, artist);
     }
 
-    public static PodcastArtist findOrCreatePodcastArtistByName(String artistName){
+    public static PodcastArtist findOrCreatePodcastArtistByName(String artistName) throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         for (PodcastArtist podcastArtist : podcastArtists){
             if (podcastArtist.getName().equals(artistName)){
                 return podcastArtist;
@@ -51,27 +84,45 @@ public class Library {
         return new PodcastArtist(artistName);
     }
 
-    public static void addMusicArtist(MusicArtist artist) {
+    public static void addMusicArtist(MusicArtist artist) throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         musicArtists.add(artist);
     }
 
-    public static void addPodcastArtist(PodcastArtist artist){
+    public static void addPodcastArtist(PodcastArtist artist) throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         podcastArtists.add(artist);
     }
 
-    public static void addPodcast(Podcast podcast){
+    public static void addPodcast(Podcast podcast) throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         podcasts.add(podcast);
     }
 
-    public static void addAlbum(Album album) {
+    public static void addAlbum(Album album) throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         albums.add(album);
     }
 
-    public static void addPlaylist(Playlist playlist){
+    public static void addPlaylist(Playlist playlist) throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         playlists.add(playlist);
     }
 
-    public static void addSongToPlaylist(Song song, String playlistName){
+    public static void addSongToPlaylist(Song song, String playlistName) throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         for (Playlist playlist1 : playlists){
             if (playlist1.getName().equals(playlistName)){
                 playlist1.addSong(song);
@@ -82,7 +133,10 @@ public class Library {
         playlists.add(newPlaylist);
     }
 
-    public static void addSongToAlbum(Song song, Album album) {
+    public static void addSongToAlbum(Song song, Album album) throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         for (Album album1 : Library.albums) {
             if (album1 == album) {
                 album1.addSong(song);
@@ -90,7 +144,10 @@ public class Library {
         }
     }
 
-    public static void addAlbumToArtist(Album album, MusicArtist artist) {
+    public static void addAlbumToArtist(Album album, MusicArtist artist) throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         for (Album album1 : artist.getAlbums()) {
             if (album == album1) {
                 return;
@@ -99,7 +156,12 @@ public class Library {
         artist.appendAlbum(album);
     }
 
-    public static void addSong(Song song) { songs.add(song);  }
+    public static void addSong(Song song) throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
+        songs.add(song);
+    }
 
 
     public static Vector<Album> getAlbums() {
@@ -114,7 +176,10 @@ public class Library {
         return songs;
     }
 
-    public static void printAlbums() {
+    public static void printAlbums() throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         for (Album album : albums) {
             System.out.println("Album name: " + album.getName() + ", genre: " + album.getGenre() + " by " + album.getArtist().getName() + " duration: " + album.getDuration());
             Vector<Song> albumSongs = album.getSongs();
@@ -125,7 +190,10 @@ public class Library {
         System.out.println();
     }
 
-    public static void printPlaylistByName(String playlistName){
+    public static void printPlaylistByName(String playlistName) throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         for (Playlist playlist:playlists){
             if(playlist.getName().equals(playlistName)){
                 for (Song song : playlist.getList()) {
@@ -139,7 +207,10 @@ public class Library {
 
     }
 
-    public static void printPodcastArtists(){
+    public static void printPodcastArtists() throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         for(PodcastArtist artist : podcastArtists){
             System.out.println("Artist name: " + artist.getName() + " produced " + artist.getPodcasts().size() + " podcasts:");
             for (Podcast podcast : podcasts){
@@ -151,10 +222,12 @@ public class Library {
     }
 
     public static Vector<PodcastArtist> getPodcastArtists() {
+
         return podcastArtists;
     }
 
     public static Vector<Podcast> getPodcasts() {
+
         return podcasts;
     }
 
@@ -162,28 +235,40 @@ public class Library {
         return playlists;
     }
 
-    public static void printPodcasts() {
+    public static void printPodcasts() throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         for (Podcast podcast : podcasts) {
             System.out.println("Podcast name :" + podcast.getName() + " by: " + podcast.getArtist().getName() + ", duration: " + podcast.getDuration());
         }
         System.out.println();
     }
 
-    public static void printSongs() {
+    public static void printSongs() throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         for (Song song : songs) {
             System.out.println("Song name :" + song.getName() + " artist: " + song.getArtist().getName() + ", album: " + song.getAlbum().getName());
         }
         System.out.println();
     }
 
-    public static void printArtists() {
+    public static void printArtists() throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         for (MusicArtist artist : musicArtists) {
             System.out.println("Artist name: " + artist.getName());
         }
         System.out.println();
     }
 
-    public static void printSongsFromAlbum(String albumName){
+    public static void printSongsFromAlbum(String albumName) throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         for (Song song :songs){
             if (song.getAlbum().getName().equals(albumName)){
                 System.out.println("Song name :" + song.getName() + " artist: " + song.getArtist().getName() + ", album: " + song.getAlbum().getName());
@@ -191,7 +276,10 @@ public class Library {
         }
     }
 
-    public static void printAlbumsFromArtist(String artistName){
+    public static void printAlbumsFromArtist(String artistName) throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         for (Album album :albums){
             if (album.getArtist().getName().equals(artistName)){
                 System.out.println("Album name: " + album.getName() + ", genre: " + album.getGenre() + " by " + album.getArtist().getName() + " duration: " + album.getDuration());
@@ -199,7 +287,10 @@ public class Library {
         }
     }
 
-    public static void printSongsFromArtist(String artistName){
+    public static void printSongsFromArtist(String artistName) throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
         for (Song song :songs){
             if (song.getArtist().getName().equals(artistName)){
                 System.out.println("Song name :" + song.getName() + " artist: " + song.getArtist().getName() + ", album: " + song.getAlbum().getName());

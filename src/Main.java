@@ -8,7 +8,7 @@ import java.util.Vector;
 
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         /*
         1 add a new song(durationm, name, collection (album/disk or ep), artist)
         2 add a new album(name, genre, disk, artist)
@@ -66,9 +66,11 @@ public class Main {
 //
 //
 
-        ManageWithFiles manageWithFiles = ManageWithFiles.getInstance("./inputArtist.csv", "./inputPodcasts.csv",
-                "./inputSongs.csv", "./inputAlbums.csv", "./outputArtist.csv", "./outputPodcasts.csv",
-                "./outputSongs.csv", "./outputAlbums.csv");
+        ManageWithFiles manageWithFiles = ManageWithFiles.getInstance("./data/inputArtist.csv",
+                "./data/inputPodcasts.csv", "./data/inputSongs.csv",
+                "./data/inputAlbums.csv", "./data/outputArtist.csv",
+                "./data/outputPodcasts.csv", "./data/outputSongs.csv",
+                "./data/outputAlbums.csv");
         manageWithFiles.loadAll();
 
         System.out.println("Print songs from MMLP2: ");
@@ -82,10 +84,11 @@ public class Main {
         Library.printPodcastArtists();
         Library.printArtists();
         Library.printAlbums();
-        manageWithFiles.storeArtists();
-        manageWithFiles.storeAlbums();
-        manageWithFiles.storePodcasts();
-        manageWithFiles.storeSongs();
+        Library.closeBuffer();
+//        manageWithFiles.storeArtists();
+//        manageWithFiles.storeAlbums();
+//        manageWithFiles.storePodcasts();
+//        manageWithFiles.storeSongs();
     }
 
 

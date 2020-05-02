@@ -2,12 +2,13 @@ package music.management.system;
 
 import kotlin.jvm.JvmOverloads;
 
+import java.io.IOException;
 import java.util.Vector;
 
 public final class MusicArtist extends Artist {
     private Vector<Album> albums = null; // albums produced by artist
 
-    public MusicArtist(String name) {
+    public MusicArtist(String name) throws IOException {
         this.name = name;
         this.genres = null;
         this.albums = new Vector<Album>();
@@ -15,7 +16,7 @@ public final class MusicArtist extends Artist {
     }
 
     @JvmOverloads
-    public MusicArtist(String name, Album album) {
+    public MusicArtist(String name, Album album) throws IOException {
         this.name = name;
         this.albums = new Vector<Album>();
         this.albums.add(album);
@@ -25,7 +26,7 @@ public final class MusicArtist extends Artist {
     }
 
     @JvmOverloads
-    public MusicArtist(String name, Vector<Album> albums, Vector<String> genres) {
+    public MusicArtist(String name, Vector<Album> albums, Vector<String> genres) throws IOException {
         this.name = name;
         this.albums = albums;
         this.genres = genres;

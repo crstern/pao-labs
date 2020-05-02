@@ -1,5 +1,6 @@
 package music.management.system;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Vector;
 
@@ -12,7 +13,7 @@ public class Album {
     private Vector<Song> songs = null;
 
 
-    public Album(String genre, String name, String artistName, Integer duration, Date releaseDate, Vector<Song> songs) {
+    public Album(String genre, String name, String artistName, Integer duration, Date releaseDate, Vector<Song> songs) throws IOException {
         this.genre = genre;
         this.name = name;
         this.artist = Library.findOrCreateMusicArtistByName(artistName, this);
@@ -23,7 +24,7 @@ public class Album {
         Library.addAlbumToArtist(this, this.artist);
     }
 
-    public Album(String genre, String name, String artistName) {
+    public Album(String genre, String name, String artistName) throws IOException {
         this.genre = genre;
         this.name = name;
         this.duration = 0;
@@ -34,7 +35,7 @@ public class Album {
     }
 
 
-    public Album(String genre, String name, MusicArtist artist) {
+    public Album(String genre, String name, MusicArtist artist) throws IOException {
         this.duration = 0;
         this.genre = genre;
         this.name = name;
@@ -84,7 +85,7 @@ public class Album {
         this.artist = artist;
     }
 
-    public void addSong(Song song) {
+    public void addSong(Song song) throws IOException {
         Library.addSong(song);
         this.songs.add(song);
         this.duration += song.getDuration();
