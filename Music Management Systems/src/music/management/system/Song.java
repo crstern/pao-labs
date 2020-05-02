@@ -1,10 +1,12 @@
 package music.management.system;
 
+import java.io.IOException;
+
 public class Song extends Track {
     private Album album;
     private MusicArtist artist;
 
-    public Song(String name, String genre, String albumName, String artistName, Integer duration) {
+    public Song(String name, String genre, String albumName, String artistName, Integer duration) throws IOException {
         this.name = name;
         this.genre = genre;
         this.artist = Library.findOrCreateMusicArtistByName(artistName);

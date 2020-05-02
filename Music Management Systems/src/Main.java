@@ -8,7 +8,7 @@ import java.util.Vector;
 
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         /*
         1 add a new song(durationm, name, collection (album/disk or ep), artist)
         2 add a new album(name, genre, disk, artist)
@@ -84,10 +84,11 @@ public class Main {
         Library.printPodcastArtists();
         Library.printArtists();
         Library.printAlbums();
-        manageWithFiles.storeArtists();
-        manageWithFiles.storeAlbums();
-        manageWithFiles.storePodcasts();
-        manageWithFiles.storeSongs();
+        Library.closeBuffer();
+//        manageWithFiles.storeArtists();
+//        manageWithFiles.storeAlbums();
+//        manageWithFiles.storePodcasts();
+//        manageWithFiles.storeSongs();
     }
 
 
