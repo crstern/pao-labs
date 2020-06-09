@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="cristi" uuid="4adaae8d-299f-486c-a49f-a2222bbfef6e">
+      <driver-ref>oracle</driver-ref>
+      <synchronize>true</synchronize>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@localhost:3001:XE</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="cealapa@127.0.0.1" uuid="bf079ac5-44bd-477c-aa63-b9b5072539e9">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1:3306/cealapa</jdbc-url>
+    </data-source>
+  </component>
+</project>

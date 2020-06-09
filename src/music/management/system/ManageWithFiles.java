@@ -210,7 +210,7 @@ public class ManageWithFiles {
         try {
             bf = new BufferedWriter(new FileWriter(this.storeSongsFile));
             for (Song song : Library.getSongs()) {
-                bf.write(song.getName() + csvSplitBy + song.getGenre() + csvSplitBy + song.getArtist().getName() +
+                bf.write(song.getName() + csvSplitBy + song.getGenre() + csvSplitBy + song.getAlbum().getName() + csvSplitBy + song.getArtist().getName() +
                         csvSplitBy + song.getDuration() + "\n");
             }
         } catch (IOException e) {

@@ -1,5 +1,6 @@
 package music.management.system;
 
+import config.SetUpData;
 import kotlin.jvm.JvmOverloads;
 
 import java.io.BufferedWriter;
@@ -296,6 +297,29 @@ public class Library {
                 System.out.println("Song name :" + song.getName() + " artist: " + song.getArtist().getName() + ", album: " + song.getAlbum().getName());
             }
         }
+    }
+
+    public static void storeAllInDataBase(){
+        SetUpData setUpData = new SetUpData();
+        setUpData.setUp();
+
+        for(Song song : getSongs()){
+            setUpData.addSong(song);
+        }
+
+        for(Album album : getAlbums()){
+            setUpData.addAlbum(album);
+        }
+
+        for(Artist artist : getMusicArtists()){
+            setUpData.addArtist(artist);
+        }
+
+        for(Podcast podcast : getPodcasts()){
+            setUpData.addPodcast(podcast);
+        }
+
+
     }
 
 }
