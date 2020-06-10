@@ -61,6 +61,18 @@ public class Library {
         return new MusicArtist(name, album);
     }
 
+    public static Song findOrCreateSongByName(String name, String genre, String album, String artist, Integer duration) throws IOException {
+        String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
+        storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());
+
+        for (Song song : songs) {
+            if (song.getName().equals(name)) {
+                return song;
+            }
+        }
+        return new Song(name, genre, album, artist, duration);
+    }
+
     public static Album findOrCreateAlbumByName(String name, String genre, MusicArtist artist) throws IOException {
         String nameofCurrMethod = new Throwable().getStackTrace()[0].getMethodName();
         storeActionTimestamp(nameofCurrMethod, (new Timestamp(System.currentTimeMillis())).getTime());

@@ -32,14 +32,16 @@ public class Main {
 //        Library.printAlbums();
 //        Library.closeBuffer();
         SetUpData setUpData = new SetUpData();
-//        Library.storeAllInDataBase();
+
+
+        setUpData.deleteSongByName("Battery");
 
         Song track0 = setUpData.getSongByName("Battery");
         Album album = setUpData.getAlbumByName("Master of Puppets");
         MusicArtist artist = setUpData.getArtistByName("Metallica");
         Podcast podcast = setUpData.getPodcastByName("Tataee");
 
-        Library.printPodcasts();
+        Library.printAlbums();
 
 
     }

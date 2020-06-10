@@ -222,7 +222,7 @@ public class SetUpData {
         try{
             ResultSet resultSet = repositoryHelper.executeQuerySql(databaseConnection, selectSql);
             if(resultSet.next()){
-                Song song = new Song(
+                Song song = Library.findOrCreateSongByName(
                         resultSet.getString(1),
                         resultSet.getString(2),
                         resultSet.getString(3),
@@ -308,4 +308,61 @@ public class SetUpData {
         }
         return null;
     }
+
+    public void deleteSongByName(String name){
+        String selectSql = "DELETE " +
+                "FROM `songs`" +
+                "WHERE UPPER(`name`) = \"" + name.toUpperCase() +"\"";
+        Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
+        RepositoryHelper repositoryHelper = RepositoryHelper.getRepositoryHelper();
+
+        try{
+            repositoryHelper.executeUpdateSql(databaseConnection, selectSql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteAlbumByName(String name){
+        String selectSql = "DELETE " +
+                "FROM `albums`" +
+                "WHERE UPPER(`name`) = \"" + name.toUpperCase() +"\"";
+        Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
+        RepositoryHelper repositoryHelper = RepositoryHelper.getRepositoryHelper();
+
+        try{
+            repositoryHelper.executeUpdateSql(databaseConnection, selectSql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteArtistByName(String name){
+        String selectSql = "DELETE " +
+                "FROM `artists`" +
+                "WHERE UPPER(`name`) = \"" + name.toUpperCase() +"\"";
+        Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
+        RepositoryHelper repositoryHelper = RepositoryHelper.getRepositoryHelper();
+
+        try{
+            repositoryHelper.executeUpdateSql(databaseConnection, selectSql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deletePodcastsByName(String name){
+        String selectSql = "DELETE " +
+                "FROM `podcasts`" +
+                "WHERE UPPER(`name`) = \"" + name.toUpperCase() +"\"";
+        Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
+        RepositoryHelper repositoryHelper = RepositoryHelper.getRepositoryHelper();
+
+        try{
+            repositoryHelper.executeUpdateSql(databaseConnection, selectSql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
