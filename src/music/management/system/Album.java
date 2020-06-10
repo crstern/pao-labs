@@ -25,6 +25,7 @@ public class Album {
     }
 
     public Album(String genre, String name, String artistName) throws IOException {
+
         this.genre = genre;
         this.name = name;
         this.duration = 0;

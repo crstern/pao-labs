@@ -318,8 +318,6 @@ public class Library {
         for(Podcast podcast : getPodcasts()){
             setUpData.addPodcast(podcast);
         }
-
-
     }
 
 }

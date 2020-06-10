@@ -1,21 +1,19 @@
 package config;
 
-import music.management.system.Album;
-import music.management.system.Artist;
-import music.management.system.Podcast;
-import music.management.system.Song;
+import music.management.system.*;
 import repository.RepositoryHelper;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
 public class SetUpData {
-    public void setUp(){
+    public void setUp() {
 
         String words_length = "60";
-        String createSongsTableSql =  "CREATE TABLE IF NOT EXISTS songs(" +
+        String createSongsTableSql = "CREATE TABLE IF NOT EXISTS songs(" +
                 "name varchar(" + words_length + ")," +
                 "genre varchar(" + words_length + ")," +
                 "album varchar(" + words_length + ")," +
@@ -49,13 +47,12 @@ public class SetUpData {
         Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
         RepositoryHelper repositoryHelper = RepositoryHelper.getRepositoryHelper();
 
-        try{
+        try {
             repositoryHelper.executeSql(databaseConnection, createSongsTableSql);
             repositoryHelper.executeSql(databaseConnection, createAlbumsTableSql);
             repositoryHelper.executeSql(databaseConnection, createArtistsTableSql);
             repositoryHelper.executeSql(databaseConnection, createPodcastsTableSql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -132,7 +129,6 @@ public class SetUpData {
             e.printStackTrace();
         }
     }
-
 
     public void displaySongs() {
         String selectSql = "SELECT * FROM songs";
@@ -214,5 +210,102 @@ public class SetUpData {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public Song getSongByName(String name) throws SQLException {
+        String selectSql = "SELECT * " +
+                "FROM `songs`" +
+                "WHERE UPPER(`name`)=\"" + name.toUpperCase() +"\"";
+        Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
+        RepositoryHelper repositoryHelper = RepositoryHelper.getRepositoryHelper();
+
+        try{
+            ResultSet resultSet = repositoryHelper.executeQuerySql(databaseConnection, selectSql);
+            if(resultSet.next()){
+                Song song = new Song(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getInt(5)
+                        );
+                return song;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Album getAlbumByName(String name) throws SQLException {
+        String selectSql = "SELECT * " +
+                "FROM `albums`" +
+                "WHERE UPPER(`name`)=\"" + name.toUpperCase() +"\"";
+        Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
+        RepositoryHelper repositoryHelper = RepositoryHelper.getRepositoryHelper();
+
+        try{
+            ResultSet resultSet = repositoryHelper.executeQuerySql(databaseConnection, selectSql);
+            if(resultSet.next()){
+                String albumName = resultSet.getString(2);
+                String albumGenre = resultSet.getString(1);
+                String albumArtist = resultSet.getString(3);
+
+                Album album = Library.findOrCreateAlbumByName(
+                        albumGenre,
+                        albumName,
+                        Library.findOrCreateMusicArtistByName(albumArtist)
+                );
+                return album;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public MusicArtist getArtistByName(String name) throws SQLException {
+        String selectSql = "SELECT * " +
+                "FROM `artists`" +
+                "WHERE UPPER(`name`)=\"" + name.toUpperCase() +"\"";
+        Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
+        RepositoryHelper repositoryHelper = RepositoryHelper.getRepositoryHelper();
+
+        try{
+            ResultSet resultSet = repositoryHelper.executeQuerySql(databaseConnection, selectSql);
+            if(resultSet.next()){
+                String artistName = resultSet.getString(1);
+
+
+                MusicArtist artist = Library.findOrCreateMusicArtistByName(artistName);
+                return artist;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Podcast getPodcastByName(String name) throws SQLException {
+        String selectSql = "SELECT * " +
+                "FROM `podcasts`" +
+                "WHERE UPPER(`name`) like \"%" + name.toUpperCase() +"%\"";
+        Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
+        RepositoryHelper repositoryHelper = RepositoryHelper.getRepositoryHelper();
+
+        try{
+            ResultSet resultSet = repositoryHelper.executeQuerySql(databaseConnection, selectSql);
+            if(resultSet.next()){
+                Podcast podcast = new Podcast(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getInt(3)
+                );
+                return podcast;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
