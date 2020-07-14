@@ -3,6 +3,7 @@ import music.management.ManageWithFiles;
 import music.management.system.*;
 
 
+import javax.swing.*;
 import java.io.*;
 import java.sql.SQLException;
 
@@ -19,27 +20,21 @@ public class Main {
 //        manageWithFiles.loadAll();
 //        manageWithFiles.storeSongs();
 //
-//        System.out.println("Print songs from MMLP2: ");
-//
-//        Library.printSongsFromAlbum("MMLP2");
-//        System.out.println("\nPrint songs from Metallica: ");
-//        Library.printSongsFromArtist("Metallica");
-//        System.out.println("\nPrint songs from Eminem: ");
-//
-//        Library.printAlbumsFromArtist("Eminem");
-//        Library.printPodcastArtists();
-//        Library.printArtists();
-//        Library.printAlbums();
+
+
+        Library.printAlbumsFromArtist("Eminem");
+        Library.printPodcastArtists();
+        Library.printArtists();
+        Library.printAlbums();
 //        Library.closeBuffer();
         SetUpData setUpData = new SetUpData();
 
 
-        setUpData.deleteSongByName("Battery");
 
-        Song track0 = setUpData.getSongByName("Battery");
-        Album album = setUpData.getAlbumByName("Master of Puppets");
-        MusicArtist artist = setUpData.getArtistByName("Metallica");
-        Podcast podcast = setUpData.getPodcastByName("Tataee");
+        Song track0 = setUpData.getSongByName("Mother");
+        Album album = setUpData.getAlbumByName("The Wall");
+
+        MusicArtist artist = setUpData.getArtistByName("Pink Floyd");
 
         Library.printAlbums();
 
