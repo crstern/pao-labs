@@ -212,6 +212,29 @@ public class SetUpData {
         }
     }
 
+    public void loadAllSongs(){
+        String selectSql = "SELECT * " +
+                "FROM `songs`";
+        Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
+        RepositoryHelper repositoryHelper = RepositoryHelper.getRepositoryHelper();
+        try{
+            ResultSet resultSet = repositoryHelper.executeQuerySql(databaseConnection, selectSql);
+            while (resultSet.next()){
+                Library.findOrCreateSongByName(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getInt(5)
+                );
+            }
+        } catch (SQLException | IOException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+
+
     public Song getSongByName(String name) throws SQLException {
         String selectSql = "SELECT * " +
                 "FROM `songs`" +
